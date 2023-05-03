@@ -1,0 +1,5 @@
+pip install pycrypto
+pip install ssl
+pip install base64
+pip install pytest-shutil
+pip install pypiwin32
