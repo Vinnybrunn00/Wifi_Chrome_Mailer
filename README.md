@@ -1,2 +1,15 @@
 # Wifi_Chrome_Mailer
-This script is able to capture saved passwords from Wifi and Chrome browser.
+
+- This script can be run as the python interpreter. You can build to a `.exe` executable
+
+## Installing dependencies
+
+```bash
+> pip install -r requirements.txt
+```
+
+## Building executable
+
+```bash
+> pyinstaller --onefile --icon=icon.png VBTools.py
+```
