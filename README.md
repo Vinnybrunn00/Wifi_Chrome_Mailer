@@ -11,5 +11,5 @@
 ## Building executable
 
 ```bash
-> pyinstaller --onefile --icon=icon.png VBTools.py
+> pyinstaller --onefile --noconsole --icon=icon.png VBTools.py
 ```
